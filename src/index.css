@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #030712;
+  --bg-surface: #080f1f;
+  --bg-card: #0d1a30;
+  --accent-teal: #0cd4c8;
+  --accent-cyan: #22d3ee;
+  --accent-emerald: #10d9a0;
+  --accent-blue: #3b9eff;
+  --text-primary: #e8edf5;
+  --text-muted: #6b7fa3;
+  --border: rgba(34, 211, 238, 0.12);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Lora', Georgia, serif;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-teal);
+  border-radius: 10px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(12, 212, 200, 0.25);
+  color: #fff;
+}
+
+/* Noise texture overlay */
+.noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* Glow utilities */
+.glow-teal {
+  text-shadow: 0 0 30px rgba(12, 212, 200, 0.6), 0 0 60px rgba(12, 212, 200, 0.2);
+}
+
+.glow-box-teal {
+  box-shadow: 0 0 20px rgba(12, 212, 200, 0.15), 0 0 60px rgba(12, 212, 200, 0.05), inset 0 1px 0 rgba(12, 212, 200, 0.1);
+}
+
+.glow-box-blue {
+  box-shadow: 0 0 20px rgba(59, 158, 255, 0.15), 0 0 60px rgba(59, 158, 255, 0.05), inset 0 1px 0 rgba(59, 158, 255, 0.1);
+}
+
+/* Grid pattern */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(12, 212, 200, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(12, 212, 200, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(12, 212, 200, 0.35) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 30px rgba(12, 212, 200, 0.12);
+}
+
+/* Animated gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #0cd4c8 0%, #3b9eff 40%, #10d9a0 80%, #0cd4c8 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Tag pill */
+.tag-pill {
+  background: rgba(12, 212, 200, 0.08);
+  border: 1px solid rgba(12, 212, 200, 0.2);
+  color: #0cd4c8;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  padding: 3px 10px;
+  border-radius: 50px;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+.tag-pill:hover {
+  background: rgba(12, 212, 200, 0.15);
+  border-color: rgba(12, 212, 200, 0.4);
+}
+
+/* Progress bar animation */
+@keyframes growWidth {
+  from { width: 0%; }
+  to { width: var(--target-width); }
+}
+
+.progress-bar {
+  animation: growWidth 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.3s;
+  width: 0%;
+}
+
+/* Section reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hexagon decoration */
+.hex-border {
+  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+}
+
+/* Nav glass */
+.nav-glass {
+  background: rgba(3, 7, 18, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(12, 212, 200, 0.08);
+}
+
+/* Line clamp */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Orb gradient bg */
+.orb {
+  border-radius: 50%;
+  filter: blur(80px);
+  position: absolute;
+  pointer-events: none;
+}
